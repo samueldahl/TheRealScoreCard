@@ -16,7 +16,7 @@ export class AddPanelComponent implements OnInit {
 
   getCourses(): void {
     this.getCoursesService.getCourses().subscribe(rawCourses => {
-      console.log(rawCourses);
+      this.courses = rawCourses.courses;
     });
   }
 
