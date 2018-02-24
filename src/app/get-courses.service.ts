@@ -13,8 +13,11 @@ export class GetCoursesService {
 
   constructor(private http: HttpClient) { }
 
-  getCourses(): Observable<Object> {
+  getCourses(): Observable<any> {
     return this.http.post('https://golf-courses-api.herokuapp.com/courses', {latitude: 40.296898, longitude:-111.694647, radius:50}, httpOptions);
+  }
+  getCourseInfo(id: number): Observable<any> {
+    return this.http.get('https://golf-courses-api.herokuapp.com/courses/' + id, httpOptions);
   }
 
 }
