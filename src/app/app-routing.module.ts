@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component'
-import { ScoreCardComponent } from './score-card/score-card.component';
+import { ScorePageComponent } from './score-page/score-page.component';
 
 const routes: Routes = [
-  { path: 'scorecard', component: ScoreCardComponent },
+  { path: 'scorecard', component: ScorePageComponent },
   { path: '', component: WelcomePageComponent}
 ];
 

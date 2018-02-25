@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ScoreCardComponent } from './score-card.component';
+import { CourseSelectorComponent } from './course-selector.component';
 
-describe('ScoreCardComponent', () => {
-  let component: ScoreCardComponent;
-  let fixture: ComponentFixture<ScoreCardComponent>;
+describe('AddPanelComponent', () => {
+  let component: AddPanelComponent;
+  let fixture: ComponentFixture<AddPanelComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScoreCardComponent ]
+      declarations: [ AddPanelComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ScoreCardComponent);
+    fixture = TestBed.createComponent(AddPanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,12 +3,12 @@ import { GetCoursesService } from '../get-courses.service';
 import { GolfCourse } from '../golf-course';
 
 @Component({
-  selector: 'app-add-panel',
-  templateUrl: './add-panel.component.html',
-  styleUrls: ['./add-panel.component.css']
+  selector: 'app-course-selector',
+  templateUrl: './course-selector.component.html',
+  styleUrls: ['./course-selector.component.css']
 })
 
-export class AddPanelComponent implements OnInit {
+export class CourseSelectorComponent implements OnInit {
 
   courses: GolfCourse[];
   course: GolfCourse;

@@ -4,19 +4,23 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
-import { ScoreCardComponent } from './score-card/score-card.component';
+import { ScorePageComponent } from './score-page/score-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
-import { AddPanelComponent } from './add-panel/add-panel.component';
+import { CourseSelectorComponent } from './course-selector/course-selector.component';
 import { GetCoursesService } from './get-courses.service';
+import { ScorecardComponent } from './scorecard/scorecard.component';
+import { ScorecardDirective } from './scorecard.directive'
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ScoreCardComponent,
+    ScorePageComponent,
     WelcomePageComponent,
-    AddPanelComponent
+    CourseSelectorComponent,
+    ScorecardComponent,
+    ScorecardDirective
   ],
   imports: [
     BrowserModule,
