@@ -1,5 +1,13 @@
 <app-course-selector></app-course-selector>
 <br />
-<input class="addPlayer" />
-<button (click)="addPlayer();">Make Lil'Pump a player! </button>
+<select #teeTypeSelector (change)="teeType = teeTypeSelector.value;" >
+  <option>
+
+  </option>
+  <option *ngFor="let tee of courseService.course?.tee_types" value="{{courseService.course.tee_types.indexOf(tee)}}" >
+    {{tee.tee_type}}
+  </option>
+</select>
+<input #nameInput class="addPlayer" [value]="playerName" (change)="playerName = nameInput.value;" />
+<button (click)="addPlayer();">Make player</button>
 <ng-template scorecard></ng-template>

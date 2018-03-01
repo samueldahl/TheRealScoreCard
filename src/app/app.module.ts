@@ -10,7 +10,10 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { CourseSelectorComponent } from './course-selector/course-selector.component';
 import { GetCoursesService } from './get-courses.service';
 import { ScorecardComponent } from './scorecard/scorecard.component';
-import { ScorecardDirective } from './scorecard.directive'
+import { ScorecardDirective } from './scorecard.directive';
+import { NameListService } from './name-list.service';
+import { CheckNamePipe } from './check-name.pipe';
+import { CourseServiceService } from './course-service.service';
 
 
 @NgModule({
@@ -20,14 +23,15 @@ import { ScorecardDirective } from './scorecard.directive'
     WelcomePageComponent,
     CourseSelectorComponent,
     ScorecardComponent,
-    ScorecardDirective
+    ScorecardDirective,
+    CheckNamePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [GetCoursesService],
+  providers: [GetCoursesService, NameListService, CourseServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GetCoursesService } from '../get-courses.service';
-import { GolfCourse } from '../golf-course';
+import { CourseServiceService } from '../course-service.service';
 
 @Component({
   selector: 'app-course-selector',
@@ -10,14 +10,16 @@ import { GolfCourse } from '../golf-course';
 
 export class CourseSelectorComponent implements OnInit {
 
-  courses: GolfCourse[];
-  course: GolfCourse;
+  courses: any[];
+  course: any;
 
-  constructor(private getCoursesService: GetCoursesService) { }
+  constructor(private getCoursesService: GetCoursesService, private courseService: CourseServiceService) { }
 
   getCourseInfo(id: number): void {
     this.getCoursesService.getCourseInfo(id).subscribe(course => {
       this.course = course.course;
+      // stores newly selected course in the course service
+      this.courseService.setCourse(course.course);
       console.log(this.course);
     });
   }

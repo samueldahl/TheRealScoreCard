@@ -1,48 +1,47 @@
-<table class="scoreCard">
-  <tr>
-    <td>
-      Hole
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Yardage
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Handicap
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Par
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Score
-    </td>
-  </tr>
-
-</table>
-
-
-<!-- <table class="scoreCard">
-  <tr>
-    <td>
-      JD IS A DWARF
-    </td>
-    <td>
-      AND HES DIGGING A HOLE
-    </td>
-  </tr>
-  <tr>
-    <td>
-      DIGGY DIGGY HOLE
-    </td>
-    <td>
-      DIGGY DIGGY HOLE
-    </td>
-  </tr>
-</table> -->
+<div class="scorecard">
+  <p>Player number: {{playerId}}</p>
+  <p>Name: {{playerName | checkName}}</p>
+  <br />
+  <table class="card">
+		<tr>
+      <td>
+        Hole
+      </td>
+			<td *ngFor="let hole of holes">
+        {{hole.hole_num}}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Yardage
+			</td>
+      <td *ngFor="let hole of holes">
+        {{hole.tee_boxes[teeType].yards}}
+      </td>
+		</tr>
+		<tr>
+			<td>
+				Handicap
+			</td>
+      <td *ngFor="let hole of holes">
+        {{hole.tee_boxes[teeType].hcp}}
+      </td>
+		</tr>
+		<tr>
+			<td>
+				Par
+			</td>
+      <td *ngFor="let hole of holes">
+        {{hole.tee_boxes[teeType].par}}
+      </td>
+		</tr>
+		<tr>
+			<td>
+				Score
+			</td>
+      <td *ngFor="let hole of holes">
+        <input class="Score" />
+      </td>
+		</tr>
+  </table>
+</div>

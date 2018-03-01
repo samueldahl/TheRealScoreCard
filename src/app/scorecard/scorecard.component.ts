@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CourseServiceService } from '../course-service.service';
 
 @Component({
   selector: 'app-scorecard',
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./scorecard.component.css']
 })
 export class ScorecardComponent implements OnInit {
-  constructor() { }
+  playerId: number;
+  playerName: string;
+  holes: any[];
+  teeType: number;
+  constructor(private courseService: CourseServiceService) { }
 
   ngOnInit() {
   }
