@@ -10,6 +10,9 @@
 			<td *ngFor="let hole of holes">
         {{hole.hole_num}}
 			</td>
+      <td>
+        TOTALS
+      </td>
 		</tr>
 		<tr>
 			<td>
@@ -17,6 +20,9 @@
 			</td>
       <td *ngFor="let hole of holes">
         {{hole.tee_boxes[teeType].yards}}
+      </td>
+      <td>
+        {{totalYardage}}
       </td>
 		</tr>
 		<tr>
@@ -26,6 +32,9 @@
       <td *ngFor="let hole of holes">
         {{hole.tee_boxes[teeType].hcp}}
       </td>
+      <td>
+
+      </td>
 		</tr>
 		<tr>
 			<td>
@@ -34,13 +43,19 @@
       <td *ngFor="let hole of holes">
         {{hole.tee_boxes[teeType].par}}
       </td>
+      <td>
+        {{totalPar}}
+      </td>
 		</tr>
 		<tr>
 			<td>
 				Score
 			</td>
       <td *ngFor="let hole of holes">
-        <input class="Score" />
+        <input appScoreCount type="number" class="Score" />
+      </td>
+      <td >
+
       </td>
 		</tr>
   </table>

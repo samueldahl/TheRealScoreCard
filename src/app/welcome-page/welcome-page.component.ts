@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomePageComponent implements OnInit {
 
-  title = 'TheRealScoreCard';
+  title = 'I am sick of this';
 
   constructor() { }
 

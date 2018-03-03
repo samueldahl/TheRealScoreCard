@@ -14,6 +14,7 @@ import { ScorecardDirective } from './scorecard.directive';
 import { NameListService } from './name-list.service';
 import { CheckNamePipe } from './check-name.pipe';
 import { CourseServiceService } from './course-service.service';
+import { ScoreCountDirective } from './score-count.directive';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { CourseServiceService } from './course-service.service';
     CourseSelectorComponent,
     ScorecardComponent,
     ScorecardDirective,
-    CheckNamePipe
+    CheckNamePipe,
+    ScoreCountDirective
   ],
   imports: [
     BrowserModule,

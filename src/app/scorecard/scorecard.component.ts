@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseServiceService } from '../course-service.service';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-scorecard',
@@ -11,6 +12,8 @@ export class ScorecardComponent implements OnInit {
   playerName: string;
   holes: any[];
   teeType: number;
+  totalPar: number;
+  totalYardage: number;
   constructor(private courseService: CourseServiceService) { }
 
   ngOnInit() {

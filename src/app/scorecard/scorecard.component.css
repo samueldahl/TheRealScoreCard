@@ -3,3 +3,6 @@ td {
   border-color: black;
   border-collapse: collapse;
 }
+input {
+  width:50px;
+}
