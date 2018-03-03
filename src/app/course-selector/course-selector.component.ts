@@ -16,6 +16,11 @@ export class CourseSelectorComponent implements OnInit {
   constructor(private getCoursesService: GetCoursesService, private courseService: CourseServiceService) { }
 
   getCourseInfo(id: number): void {
+    if (id == '') {
+      this.courseService.setCourse(undefined);
+      this.course = undefined;
+      return;
+    }
     this.getCoursesService.getCourseInfo(id).subscribe(course => {
       this.course = course.course;
       // stores newly selected course in the course service
@@ -24,7 +29,11 @@ export class CourseSelectorComponent implements OnInit {
     });
   }
 
-  getCourses(): void {
+  getCourses(id): void {
+    if (id == '') {
+      this.courses = undefined;
+      return;
+    }
     this.getCoursesService.getCourses().subscribe(rawCourses => {
       this.courses = rawCourses.courses;
       console.log(this.courses);

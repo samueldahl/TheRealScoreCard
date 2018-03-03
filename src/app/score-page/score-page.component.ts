@@ -22,7 +22,15 @@ export class ScorePageComponent implements OnInit {
   playerName: string = '';
   teeType: number;
 
+  validateInputs(): boolean {
+    if (this.courseService.course === undefined || this.teeType == '' || this.playerName == '') {
+      return false;
+    }
+    return true;
+  }
+
   addPlayer(): void {
+    if (!this.validateInputs()) return;
     this.nameList.addName(this.playerName);
     // loads component into factory variable
     var factory = this.componentFactoryResolver.resolveComponentFactory(ScorecardComponent);
