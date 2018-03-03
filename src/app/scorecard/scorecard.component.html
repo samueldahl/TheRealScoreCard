@@ -51,11 +51,11 @@
 			<td>
 				Score
 			</td>
-      <td *ngFor="let hole of holes">
-        <input appScoreCount type="number" class="Score" />
+      <td *ngFor="let hole of holes; index as i;">
+        <input #score appScoreCount type="number" class="Score" (change)="scoreArray[i] = $event.target.value; calculateTotalScore();"/>
       </td>
       <td >
-
+        {{scoreTotal}}
       </td>
 		</tr>
   </table>

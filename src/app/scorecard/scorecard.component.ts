@@ -14,7 +14,22 @@ export class ScorecardComponent implements OnInit {
   teeType: number;
   totalPar: number;
   totalYardage: number;
+  scoreArray: number[] = [];
+  scoreTotal: number = 0;
+
   constructor(private courseService: CourseServiceService) { }
+
+  afterValuesFilled(): void {
+    this.holes.forEach((item, index) => {
+      this.scoreArray.push(0);
+    });
+  }
+  calculateTotalScore(): void {
+    this.scoreTotal = 0;
+    for (let score of this.scoreArray) {
+      this.scoreTotal += parseInt(score);
+    }
+  }
 
   ngOnInit() {
   }

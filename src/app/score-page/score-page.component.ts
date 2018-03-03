@@ -36,6 +36,7 @@ export class ScorePageComponent implements OnInit {
     cardInstance.playerName = this.playerName;
     cardInstance.holes = this.courseService.course.holes;
     cardInstance.teeType = this.teeType;
+    cardInstance.afterValuesFilled();
 
     cardInstance.totalYardage = this.courseService.course.tee_types[this.teeType].yards;
     cardInstance.totalPar = this.courseService.course.tee_types[this.teeType].par;
