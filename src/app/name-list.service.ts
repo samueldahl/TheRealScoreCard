@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
+import { CourseServiceService } from './course-service.service';
 
 @Injectable()
 export class NameListService {
 
   names: string[] = [];
 
-  constructor() { }
+  constructor(private courseService: CourseServiceService) {
+    this.courseService.onCourseChange().subscribe((newCourse) => {
+      this.names = [];
+    });
+  }
 
   addName(name: string): void {
     this.names.push(name);

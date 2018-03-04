@@ -59,6 +59,7 @@ export class ScorePageComponent implements OnInit, AfterViewInit {
 
   clearCards(): void {
     this.scorecardHost.viewContainerRef.clear();
+    this.playerId = 0;
   }
 
   ngOnInit() {}
