@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ScorecardComponent } from '../scorecard/scorecard.component'
 import { ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { ScorecardDirective } from '../scorecard.directive';
@@ -14,7 +14,7 @@ import { CourseServiceService } from '../course-service.service';
   ]
 })
 
-export class ScorePageComponent implements OnInit {
+export class ScorePageComponent implements OnInit, AfterViewInit {
 
   @ViewChild(ScorecardDirective) scorecardHost: ScorecardDirective;
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private nameList: NameListService, private courseService: CourseServiceService) { }
@@ -23,7 +23,11 @@ export class ScorePageComponent implements OnInit {
   teeType: number;
 
   validateInputs(): boolean {
-    if (this.courseService.course === undefined || this.teeType == '' || this.playerName == '') {
+    if (this.courseService.course === undefined || isNaN(this.teeType)) {
+      return false;
+    }
+    //weird whitespace stuff curtosy of Jay Dee Phlem
+    if (/\S/g.exec(this.playerName) === null) {
       return false;
     }
     return true;
@@ -53,6 +57,15 @@ export class ScorePageComponent implements OnInit {
     this.playerName = '';
   }
 
+  clearCards(): void {
+    this.scorecardHost.viewContainerRef.clear();
+  }
+
   ngOnInit() {}
+  ngAfterViewInit() {
+    this.courseService.onCourseChange().subscribe((course) => {
+      this.clearCards();
+    });
+  }
 
 }

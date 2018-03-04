@@ -16,7 +16,7 @@ export class CourseSelectorComponent implements OnInit {
   constructor(private getCoursesService: GetCoursesService, private courseService: CourseServiceService) { }
 
   getCourseInfo(id: number): void {
-    if (id == '') {
+    if (isNaN(id)) {
       this.courseService.setCourse(undefined);
       this.course = undefined;
       return;
@@ -29,11 +29,7 @@ export class CourseSelectorComponent implements OnInit {
     });
   }
 
-  getCourses(id): void {
-    if (id == '') {
-      this.courses = undefined;
-      return;
-    }
+  getCourses(): void {
     this.getCoursesService.getCourses().subscribe(rawCourses => {
       this.courses = rawCourses.courses;
       console.log(this.courses);

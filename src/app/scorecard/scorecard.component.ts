@@ -27,7 +27,7 @@ export class ScorecardComponent implements OnInit {
   calculateTotalScore(): void {
     this.scoreTotal = 0;
     for (let score of this.scoreArray) {
-      this.scoreTotal += parseInt(score);
+      this.scoreTotal += score;
     }
   }
 
