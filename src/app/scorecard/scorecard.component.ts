@@ -14,7 +14,7 @@ export class ScorecardComponent implements OnInit {
   teeType: number;
   totalPar: number;
   totalYardage: number;
-  scoreArray: number[] = [];
+  scoreArray: any[] = [];
   scoreTotal: number = 0;
 
   constructor(private courseService: CourseServiceService) { }
@@ -27,7 +27,7 @@ export class ScorecardComponent implements OnInit {
   calculateTotalScore(): void {
     this.scoreTotal = 0;
     for (let score of this.scoreArray) {
-      this.scoreTotal += score;
+      this.scoreTotal += parseInt(score);
     }
   }
 
