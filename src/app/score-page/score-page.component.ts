@@ -22,7 +22,7 @@ export class ScorePageComponent implements OnInit, AfterViewInit {
   @ViewChild(ScorecardDirective) scorecardHost: ScorecardDirective;
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private nameList: NameListService,
-              private courseService: CourseServiceService,
+              public courseService: CourseServiceService,
               private firebaseService: FirebaseService,
               private getCoursesService: GetCoursesService) { }
   playerId: number = 0;
