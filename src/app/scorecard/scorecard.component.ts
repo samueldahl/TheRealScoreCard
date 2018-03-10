@@ -15,16 +15,16 @@ export class ScorecardComponent implements OnInit {
   teeType: number;
   totalPar: number;
   totalYardage: number;
-  scoreArray: any[] = [];
+  scoreArray: number[] = [];
   scoreTotal: number = 0;
 
   constructor(private courseService: CourseServiceService,
   private firebaseService: FirebaseService) { }
 
   afterValuesFilled(): void {
-    this.holes.forEach((item, index) => {
+    /*this.holes.forEach((item, index) => {
       this.scoreArray.push(0);
-    });
+    });*/
     this.setScores();
   }
 
@@ -41,9 +41,16 @@ export class ScorecardComponent implements OnInit {
   calculateTotalScore(): void {
     this.scoreTotal = 0;
     for (let score of this.scoreArray) {
-      this.scoreTotal += parseInt(score);
+      this.scoreTotal += score;
     }
     this.setScores();
+  }
+
+  setScore(input: string, index: number): void {
+    if (!isNaN(parseInt(input))) {
+      this.scoreArray[index] = parseInt(input);
+      this.calculateTotalScore();
+    }
   }
 
   ngOnInit() {

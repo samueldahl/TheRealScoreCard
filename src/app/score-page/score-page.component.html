@@ -9,5 +9,5 @@
   </option>
 </select>
 <input #nameInput class="addPlayer" [value]="playerName" (change)="playerName = nameInput.value;" />
-<button (click)="addPlayer();">Make player</button>
+<button (click)="addPlayer(playerName, teeType, defaultScores);">Make player</button>
 <ng-template scorecard></ng-template>

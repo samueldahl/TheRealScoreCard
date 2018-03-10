@@ -9,10 +9,12 @@ import { CourseServiceService } from './course-service.service';
 export class FirebaseService {
   private itemDoc: AngularFirestoreDocument<any>;
   private item: any;
+  item$: Observable<any>;
   scores: any[] = [];
   constructor(db: AngularFirestore, courseService: CourseServiceService) {
     this.itemDoc = db.doc('jasonFaga/golf');
-    this.itemDoc.valueChanges().subscribe((item) => {
+    this.item$ = this.itemDoc.valueChanges();
+    this.item$.subscribe((item) => {
       this.item = item;
       console.log(this.item);
     });

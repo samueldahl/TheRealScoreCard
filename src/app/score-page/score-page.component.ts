@@ -4,7 +4,9 @@ import { ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { ScorecardDirective } from '../scorecard.directive';
 import { NameListService } from '../name-list.service';
 import { CourseServiceService } from '../course-service.service';
+import { GetCoursesService } from '../get-courses.service';
 import { FirebaseService } from '../firebase.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-score-page',
@@ -21,10 +23,12 @@ export class ScorePageComponent implements OnInit, AfterViewInit {
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private nameList: NameListService,
               private courseService: CourseServiceService,
-              private firebaseService: FirebaseService) { }
+              private firebaseService: FirebaseService,
+              private getCoursesService: GetCoursesService) { }
   playerId: number = 0;
   playerName: string = '';
   teeType: number;
+  defaultScores: number[];
 
   validateInputs(): boolean {
     if (this.courseService.course === undefined || isNaN(this.teeType)) {
@@ -36,9 +40,9 @@ export class ScorePageComponent implements OnInit, AfterViewInit {
     return true;
   }
 
-  addPlayer(): void {
-    if (!this.validateInputs()) return;
-    this.nameList.addName(this.playerName);
+  addPlayer(playerName: string, teeType: number, scores: number[], overrideInputs: boolean): void {
+    if (!overrideInputs && !this.validateInputs()) return;
+    this.nameList.addName(playerName);
     // loads component into factory variable
     var factory = this.componentFactoryResolver.resolveComponentFactory(ScorecardComponent);
     // reference points to <ng-template scorecard>
@@ -48,12 +52,13 @@ export class ScorePageComponent implements OnInit, AfterViewInit {
     // sets playerId variable of live HTML version to our playerId and adds one for the next time this function is called
     var cardInstance = <ScorecardComponent>card.instance;
     cardInstance.playerId = this.playerId++;
-    cardInstance.playerName = this.playerName;
+    cardInstance.playerName = playerName;
     cardInstance.holes = this.courseService.course.holes;
-    cardInstance.teeType = this.teeType;
+    cardInstance.scoreArray = scores;
+    cardInstance.teeType = teeType;
     cardInstance.afterValuesFilled();
-    cardInstance.totalYardage = this.courseService.course.tee_types[this.teeType].yards;
-    cardInstance.totalPar = this.courseService.course.tee_types[this.teeType].par;
+    cardInstance.totalYardage = this.courseService.course.tee_types[teeType].yards;
+    cardInstance.totalPar = this.courseService.course.tee_types[teeType].par;
     console.log(cardInstance);
 
     this.playerName = '';
@@ -64,10 +69,28 @@ export class ScorePageComponent implements OnInit, AfterViewInit {
     this.playerId = 0;
   }
 
+  firebaseSub: Subscription;
+
   ngOnInit() {}
   ngAfterViewInit() {
     this.courseService.onCourseChange().subscribe((course) => {
       this.clearCards();
+      this.defaultScores = [];
+      for (let hole of course.holes) {
+        this.defaultScores.push(0);
+      }
+    });
+    this.firebaseSub = this.firebaseService.item$.subscribe((item) => {
+      this.firebaseSub.unsubscribe();
+      console.log(item);
+      if (!item.courseSet) return;
+      this.getCoursesService.getCourseInfo(item.courseId).subscribe(course => {
+        this.courseService.setCourse(course.course);
+        for (let golfer of item.golfers) {
+          console.log(golfer);
+          this.addPlayer(golfer.name, golfer.tee, golfer.scores, true);
+        }
+      });
     });
   }
 
