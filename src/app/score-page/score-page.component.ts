@@ -4,6 +4,7 @@ import { ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { ScorecardDirective } from '../scorecard.directive';
 import { NameListService } from '../name-list.service';
 import { CourseServiceService } from '../course-service.service';
+import { FirebaseService } from '../firebase.service';
 
 @Component({
   selector: 'app-score-page',
@@ -17,7 +18,10 @@ import { CourseServiceService } from '../course-service.service';
 export class ScorePageComponent implements OnInit, AfterViewInit {
 
   @ViewChild(ScorecardDirective) scorecardHost: ScorecardDirective;
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private nameList: NameListService, private courseService: CourseServiceService) { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver,
+              private nameList: NameListService,
+              private courseService: CourseServiceService,
+              private firebaseService: FirebaseService) { }
   playerId: number = 0;
   playerName: string = '';
   teeType: number;
@@ -26,7 +30,6 @@ export class ScorePageComponent implements OnInit, AfterViewInit {
     if (this.courseService.course === undefined || isNaN(this.teeType)) {
       return false;
     }
-    //weird whitespace stuff curtosy of Jay Dee Phlem
     if (/\S/g.exec(this.playerName) === null) {
       return false;
     }
@@ -49,7 +52,6 @@ export class ScorePageComponent implements OnInit, AfterViewInit {
     cardInstance.holes = this.courseService.course.holes;
     cardInstance.teeType = this.teeType;
     cardInstance.afterValuesFilled();
-
     cardInstance.totalYardage = this.courseService.course.tee_types[this.teeType].yards;
     cardInstance.totalPar = this.courseService.course.tee_types[this.teeType].par;
     console.log(cardInstance);
