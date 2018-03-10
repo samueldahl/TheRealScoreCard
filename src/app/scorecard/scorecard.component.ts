@@ -26,6 +26,7 @@ export class ScorecardComponent implements OnInit {
       this.scoreArray.push(0);
     });*/
     this.setScores();
+    this.calculateTotalScore();
   }
 
   setScores(): void {
